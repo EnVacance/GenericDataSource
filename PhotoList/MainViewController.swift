@@ -11,11 +11,13 @@ import GenericDataSource
 
 // MARK: - View Controller
 class MainViewController: UIViewController {
+    
     @IBOutlet weak var collectionView: UICollectionView!
 
     fileprivate var photosDataSource: PhotosDataSource?
     fileprivate var selectedIndexPath: IndexPath? = nil
 
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +25,7 @@ class MainViewController: UIViewController {
         photosDataSource = setUpDataSource()
     }
 
+    
     // MARK: - Segues
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == SegueIdentifiers.showDetail.rawValue,
@@ -35,20 +38,25 @@ class MainViewController: UIViewController {
     }
 }
 
+
+
 // MARK: - Data Source
 class PhotosDataSource: CollectionArrayDataSource<PhotoViewModel, PhotoCell> {}
 
+
 // MARK: - Private Methods
 fileprivate extension MainViewController {
+    
     func setUpDataSource() -> PhotosDataSource? {
+        
         let viewModels = (0..<32).map {
             return PhotoViewModel(caption: "Image \($0)", imageName: String($0))
         }
+        
         let dataSource = PhotosDataSource(collectionView: collectionView, array: viewModels)
+        
         dataSource.collectionItemSelectionHandler = { [weak self] indexPath in
-            guard let strongSelf = self else {
-                return
-            }
+            guard let strongSelf = self else { return }
             strongSelf.selectedIndexPath = indexPath
             strongSelf.performSegue(withIdentifier: SegueIdentifiers.showDetail.rawValue, sender: strongSelf)
         }
