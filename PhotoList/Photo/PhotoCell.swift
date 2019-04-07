@@ -13,6 +13,12 @@ class PhotoCell: UICollectionViewCell, ConfigurableCell {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var imageView: UIImageView!
 
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        backgroundColor = .white
+    }
+    
     // MARK: - ReusableCell
     public static var height: CGFloat = 128.0
 

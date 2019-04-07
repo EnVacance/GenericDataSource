@@ -13,7 +13,8 @@ public typealias CollectionItemSelectionHandlerType = (IndexPath) -> Void
 open class CollectionDataSource<Provider: CollectionDataProvider, Cell: UICollectionViewCell>:
     NSObject,
     UICollectionViewDataSource,
-    UICollectionViewDelegate
+    UICollectionViewDelegate,
+    UICollectionViewDelegateFlowLayout // 自分で追加。FlowLayoutのカスタマイズへ対応。
     where Cell: ConfigurableCell, Provider.T == Cell.T
 {
     // MARK: - Delegates
@@ -69,5 +70,17 @@ open class CollectionDataSource<Provider: CollectionDataProvider, Cell: UICollec
     // MARK: - UICollectionViewDelegate
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionItemSelectionHandler?(indexPath)
+    }
+    
+    
+    
+    
+    /*
+     自分で追加。Cell Sizingへ対応
+     */
+    open func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    
+        return UICollectionViewFlowLayoutAutomaticSize
+        
     }
 }

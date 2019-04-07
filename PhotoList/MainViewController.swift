@@ -41,7 +41,15 @@ class MainViewController: UIViewController {
 
 
 // MARK: - Data Source
-class PhotosDataSource: CollectionArrayDataSource<PhotoViewModel, PhotoCell> {}
+class PhotosDataSource: CollectionArrayDataSource<PhotoViewModel, PhotoCell> {
+    
+    /*
+     自分で追加。Cell Sizingへ対応
+    */
+    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: PhotoCell.height)
+    }
+}
 
 
 // MARK: - Private Methods
